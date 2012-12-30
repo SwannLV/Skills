@@ -35,11 +35,14 @@ circle {
                     {"name": "C#", "radius": 8},
 					{"name": "Asp.Net", "radius": 8.0},
 					{"name": "HTML5", "radius": 7},
+                    {"name": "jQuery", "radius": 7},
+                    {"name": "Scrum", "radius": 6},
                     {"name": "PHP", "radius": 4.5},
                     {"name": "SQL", "radius": 6},
 					{"name": "C", "radius": 4},
 					{"name": "MVC", "radius": 7},
 					{"name": "WebGL", "radius": 7},
+                    {"name": "CSS", "radius": 4.5},
 					
                 ];
 
@@ -49,8 +52,8 @@ var w = 1280/5.0*4,
 var color = d3.scale.category20b();
 
 var force = d3.layout.force()
-    .gravity(0.02)
-    .charge(function(d, i) { return i ? 0 : -1000; })
+    .gravity(0.03)
+    .charge(function(d, i) { return i ? 0 : -800; })
     .nodes(nodes)
     .size([w, h]);
 
@@ -68,12 +71,9 @@ svg.selectAll("circle")
     .data(nodes.slice(1))
     .enter().append("g").append("svg:circle")
     .attr("r", function(d) { return d.radius * d.radius; })
-	.attr("fill", "black");
-	//.attr("fill", function(d) { return "rgb(0, 0, " + (d.radius * d.radius * 2.55) + ")"; });
-    //.style("fill", function(d, i) { return color(d.radius); });
+	.attr("fill", function(d) { return "rgb(60, 40, " + parseInt(d.radius*d.radius*2+50) + ")"; });
     
 svg.selectAll("text")
-//d3.select("#body").selectAll("circle")
     .data(nodes.slice(1))
     .enter().append("svg:text")
     .text(function(d) { return d.name; })

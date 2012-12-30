@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/var/lib/openshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data//bin/node-openshift-v8',
+1 verbose cli   '/var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/lib/node_modules/npm/bin/npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'fu' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.9
+4 verbose node symlink /var/lib/openshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data//bin/node-openshift-v8
+5 verbose read json /var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/365901/package.json
+6 verbose read json /var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/365901/node_modules/express/package.json
+7 verbose from cache /var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/365901/package.json
+8 verbose readDependencies using package.json deps
+9 verbose cache add [ 'fu', null ]
+10 silly cache add name=undefined spec="fu" args=["fu",null]
+11 verbose parsed url { pathname: 'fu', path: 'fu', href: 'fu' }
+12 silly lockFile ddbc4e27-fu fu
+13 verbose lock fu /var/lib/openshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/.npm/ddbc4e27-fu.lock
+14 silly lockFile ddbc4e27-fu fu
+15 verbose addNamed [ 'fu', '' ]
+16 verbose addNamed [ null, '' ]
+17 silly lockFile b59887ed-fu fu@
+18 verbose lock fu@ /var/lib/openshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/.npm/b59887ed-fu.lock
+19 silly addNameRange { name: 'fu', range: '', hasData: false }
+20 verbose url raw fu
+21 verbose url resolving [ 'https://registry.npmjs.org/', './fu' ]
+22 verbose url resolved https://registry.npmjs.org/fu
+23 info trying registry request attempt 1 at 09:54:13
+24 http GET https://registry.npmjs.org/fu
+25 http 404 https://registry.npmjs.org/fu
+26 silly registry.get cb [ 404,
+26 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+26 silly registry.get     date: 'Sun, 30 Dec 2012 14:53:02 GMT',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'content-length': '52',
+26 silly registry.get     'cache-control': 'must-revalidate' } ]
+27 silly lockFile b59887ed-fu fu@
+28 error 404 'fu' is not in the npm registry.
+28 error 404 You should bug the author to publish it
+28 error 404
+28 error 404 Note that you can also install from a
+28 error 404 tarball, folder, or http url, or git url.
+29 error System Linux 2.6.32-279.19.1.el6.x86_64
+30 error command "/var/lib/openshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data//bin/node-openshift-v8" "/var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/lib/node_modules/npm/bin/npm-cli.js" "install" "fu"
+31 error cwd /var/lib/stickshift/22e27bc0adcb4471a4ba284075e7fade/app-root/data/365901
+32 error node -v v0.8.9
+33 error npm -v 1.1.62
+34 error code E404
+35 verbose exit [ 1, true ]
