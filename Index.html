@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <script type="text/javascript" src="d3/d3.geom.js"></script>
+    <script type="text/javascript" src="d3/d3.layout.js"></script>
+    <script type="text/javascript" src="d3/d3.v2.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <style type="text/css">
+
+circle {
+  stroke: #000;
+  stroke-opacity: .5;
+}
+
+    </style>
+  </head>
+  <body>
+  
+  <div id="body">
+      <div id="footer">
+        SwannLV
+        <div class="hint">Software Engineer</div>
+      </div>
+    </div>
+    <script type="text/javascript">
+              
+    var nodes = [
+                    {"name": "", "radius": 0},
+                    {"name": "Javascript", "radius": 8.5},
+                    {"name": "Node.js", "radius": 6.0},
+                    {"name": "C++", "radius": 7},
+                    {"name": "C#", "radius": 8},
+					{"name": "Asp.Net", "radius": 8.0},
+					{"name": "HTML5", "radius": 7},
+                    {"name": "PHP", "radius": 4.5},
+                    {"name": "SQL", "radius": 6},
+					{"name": "C", "radius": 4},
+					{"name": "MVC", "radius": 7},
+					{"name": "WebGL", "radius": 7},
+					
+                ];
+
+var w = 1280/5.0*4,
+    h = 800/5.0*4;
+
+var color = d3.scale.category20b();
+
+var force = d3.layout.force()
+    .gravity(0.02)
+    .charge(function(d, i) { return i ? 0 : -1000; })
+    .nodes(nodes)
+    .size([w, h]);
+
+var root = nodes[0];
+root.radius = 0;
+root.fixed = true;
+
+force.start();
+
+var svg = d3.select("#body").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h);
+
+svg.selectAll("circle")
+    .data(nodes.slice(1))
+    .enter().append("g").append("svg:circle")
+    .attr("r", function(d) { return d.radius * d.radius; })
+	.attr("fill", "black");
+	//.attr("fill", function(d) { return "rgb(0, 0, " + (d.radius * d.radius * 2.55) + ")"; });
+    //.style("fill", function(d, i) { return color(d.radius); });
+    
+svg.selectAll("text")
+//d3.select("#body").selectAll("circle")
+    .data(nodes.slice(1))
+    .enter().append("svg:text")
+    .text(function(d) { return d.name; })
+	.attr("text-anchor", "middle")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", function(d) { return (d.radius*d.radius/2.5) + 'px'; })
+    .attr("fill", "white");
+
+force.on("tick", function(e) {
+	var q = d3.geom.quadtree(nodes),
+	  i = 0,
+	  n = nodes.length;
+
+	while (++i < n) {
+	q.visit(collide(nodes[i]));
+	}
+
+	svg.selectAll("circle")
+	  .attr("cx", function(d) { return d.x; })
+	  .attr("cy", function(d) { return d.y; });
+
+	svg.selectAll("text")
+      .attr("x", function(d) { return d.x; })
+      .attr("y", function(d) { return d.y + d.radius; });
+});
+
+svg.on("mousemove", function() {
+  var p1 = d3.svg.mouse(this);
+  root.px = p1[0];
+  root.py = p1[1];
+  force.resume();
+});
+
+function collide(node) {
+  var r = node.radius + 26,
+      nx1 = node.x - r,
+      nx2 = node.x + r,
+      ny1 = node.y - r,
+      ny2 = node.y + r;
+  return function(quad, x1, y1, x2, y2) {
+    if (quad.point && (quad.point !== node)) {
+      var x = node.x - quad.point.x,
+          y = node.y - quad.point.y,
+          l = Math.sqrt(x * x + y * y),
+          r = node.radius * node.radius + quad.point.radius * quad.point.radius;
+      if (l < r) {
+        l = (l - r) / l * .5;
+        node.x -= x *= l;
+        node.y -= y *= l;
+        quad.point.x += x;
+        quad.point.y += y;
+      }
+    }
+    return x1 > nx2
+        || x2 < nx1
+        || y1 > ny2
+        || y2 < ny1;
+  };
+}
+
+    </script>
+  </body>
+</html>
