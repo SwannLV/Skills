@@ -46,13 +46,11 @@ circle {
 					
                 ];
 
-var w = 1280/5.0*4,
-    h = 800/5.0*4;
-
-var color = d3.scale.category20b();
+var w = window.innerWidth ,
+    h = window.innerHeight ;
 
 var force = d3.layout.force()
-    .gravity(0.03)
+    .gravity(0.015)
     .charge(function(d, i) { return i ? 0 : -800; })
     .nodes(nodes)
     .size([w, h]);
@@ -64,8 +62,8 @@ root.fixed = true;
 force.start();
 
 var svg = d3.select("#body").append("svg:svg")
-    .attr("width", w)
-    .attr("height", h);
+    .attr("width", '100%')
+    .attr("height", '100%');
 
 svg.selectAll("circle")
     .data(nodes.slice(1))
